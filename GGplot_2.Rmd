@@ -1,0 +1,118 @@
+---
+title: "Note book GGplot_2"
+output:
+  html_document: default
+  pdf_document: default
+encoding: UTF-8
+---
+
+```{r setup, include=FALSE} 
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Utilisation de GGplot_2 
+
+GGplot2 est une extension du tidyverse qui permet de générer des graphiques avec une syntaxe cohérente et puissante. Elle nécessite l apprentissage d un mini-langage supplémentaire, mais permet la construction de graphiques complexes de maniere éfficace.
+
+Une des particularités de GGplot2 est  que l extension  part du principe que les données relatives à un graphique sont stockés dans un tableau de données (data frame, tibble ou autre). 
+
+Les prérequis :
+<br>  Il faut tout d abord avoir  un data frame du type 
+
+```{r}
+library(ggplot2)
+head(mpg)
+```
+
+
+Une fois le tableau initialisé, il  est temps de jouer avec les données. La manipulation passe par deux axes clés : 
+<br>- la definition des variables sur leur axe respéctifs <br>- le type de graphique à utliser. 
+
+Il existe  une multitude de graphiques qui ont chacun une fonction bien précise.
+
+
+
+
+
+## Le nuage de point 
+Definition: en statistiques, un nuage de points est une représentation de données dépendant de plusieurs variables. Il permet de mettre en évidence le degré de corrélation entre au moins deux variables liées. Les différentes observations des nuages de points permettent de déterminer : Des tendances Des dépendances.
+Utilisable avec la fonction : geom_point ( qui permet de modifier : taille, couleur et forme des points). 
+  
+Une fois l intialisation terminée, il faut utliser la fonction suivante : 
+
+```{r}
+ggplot(mtcars, aes(x=wt, y=mpg))+ geom_point()
+#(definition du DataFrame, definition des axes : aes (x = , y = )+ geom_point()
+```
+
+Pour la question des points, tout est dans la definition du "geom_point", personalisable à l'infini 
+
+```{r}
+ggplot(mpg) + 
+  geom_point(aes(x = cyl, y = displ), 
+             color = "darkgreen", size = 3, alpha = 0.3)
+```
+
+
+## Les Histogrammes: 
+
+Definition : Représentation graphique des fréquences ou effectifs relatifs à un caractere quantitatif continu à l'aide d'une série de rectangles dont la base constitue un intervalle de variation des valeurs du caractere et la surface l effectif correspondant.
+Pour cela, il faut utiliser la commande : geom_histogram qui se configure de la manière suivante : 
+
+```{r}
+ggplot(mpg) + geom_histogram(aes(x = cyl))
+```
+
+Definir X permet d'afficher la donnée que l'on souhaite representer. 
+
+
+## LES BOITES A MOUSTACHE :
+Definition : Dans les représentations graphiques de données statistiques, la boite à moustaches est un moyen rapide de figurer le profil essentiel d une série statistique quantitative. Elle a été inventée en 1977 par John Tukey, mais peut faire l objet de certains aménagements selon les utilisateurs.
+
+utilisable avec la commande : "geom_boxplot" : 
+```{r}
+ggplot(mpg) + geom_boxplot(aes(x = cty , y = hwy),fill = "wheat", color = "blue")
+```
+
+exemple toujours avec le tableau ci dessus 
+Personnalisable avec les commandes : 
+
+
+ 
+ Toujours avec les boites à moustaches, la commande "varwidth" permet de varier la longueure des boites en fonctions  des effectifs de la catégorie. Pour l'appliquer, on fait : 
+ 
+```{r}
+ggplot(mpg) + geom_boxplot(aes(x = cyl, y = drv), varwidth = TRUE)
+```
+
+
+
+
+Pour cela, il faut utiliser la commande : geom_histogram qui se configure de la manière suivante 
+
+geom_histogram(aes(x = mpg))
+
+Definir X permet d afficher la donnée que l on souhaite representer. 
+
+## Geom_violin : 
+geom_violin est tres semblable à geom_boxplot, mais utilise des graphes en violon à la place des boites à moustache.
+Les graphes en violon peuvent donner une lecture plus fine des différences de distribution selon les classes.  
+```{r}
+ggplot(mpg) + geom_violin(aes(x = cyl, y = displ))
+```
+
+
+ 
+ 
+##Pour plus d'information : 
+https://juba.github.io/tidyverse/08-ggplot2.html#ressources-1
+
+
+ 
+
+
+
+
+
+
+
